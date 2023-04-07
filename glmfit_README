@@ -1,0 +1,87 @@
+# GLM_fit in freesurfer
+
+https://andysbrainbook.readthedocs.io/en/latest/FreeSurfer/FS_ShortCourse/FS_07_FSGD.html
+
+https://andysbrainbook.readthedocs.io/en/latest/FreeSurfer/FS_ShortCourse/FS_10_CorrelationAnalysis.html#fs-10-correlationanalysis
+
+https://surfer.nmr.mgh.harvard.edu/fswiki/Fsgdf1G2V 
+
+#make sure you have loaded the right free surfer module
+
+ module load freesurfer/6.0.6 (or whichever is newest) 
+
+1. create new dir where all recon-all output dirs are for each subject
+
+ cd /work/cnelab
+ mkdir <studyname_FS>
+
+
+2. copy fsaverage temaplte to study dir 
+
+ cp -R $FREESURFER_HOME/subjects/fsaverage . 
+
+3. define sub dir 
+
+ export SUBJECTS_DIR=`pwd` 
+ or 
+ setenv SUBJECTS_DIR `pwd` if in tcsh (on cluster it is the former)
+
+4. Create FSGH and Contrasts dirs within study dir: 
+
+ mkdir FSGD Contrasts 
+
+5. Create fsgd file in excel with correct study data - see example .FSGD in /work/cnelab/code/freesurfer and in andysbrainbook and save as .txt
+
+6. upload .txt fsgd file to FSGD dir
+
+7. Convert .txt file to .fsgd format
+
+ tr '\r' '\n' < name.txt > name.fsgd 
+
+8. Navigate to Contrast dir and create contrast file- see examples in andybrainbook and here are some common ones  
+
+ # to regress a single continuous variable (1st var in .fsgd file) while controlling for 5 covariates (following 4 continuous vars in .fsgd file) with all vertices in brain mask crate contrast file with the following: 
+
+ echo "0 1 0 0 0 0 0" > 1group1var5covars.mtx . first 0 indicates group mean (intercept). See third link at top of readme file (line 7) for other examples
+
+ # to create a two group by continuous variable interaction (e.g., differential effect of age on brain structure in males vs females) with 4 covariates:
+
+ echo "0 0 1 -1 0 0 0 0 0 0 0 0" > 2group1var4covarsall.mtx 
+
+9. Switch shell to tcsh
+
+ tcsh 
+
+10. Navigate to main FS dir
+
+11. Run preprocessing script 
+
+ tcsh runMRIsPreproc.sh studyname       note study name is same as FSGD file 
+
+12. Run GLM fit script 
+
+ tcsh runGLMs.sh studyname       	note study name is same as FSGD file- ensure Contrasts .mtx file is correct for that GLM
+
+13. Run cluster correction script
+
+ tcsh runClustSims.sh studyname   	note study name is same as FSGD file. Ensure -cache is at 3.0 (p<0.001). 
+
+NOTES:
+
+There are several options within the .sh files that need to be discussed with the PI and will be dictated based on several factors. For instance, using the --cache option must use value of 3.0 to have a vertex wise threshold of 0.001. r, if -qcache was not flagged during recon all, these cached thresholds wont exist in each subjects fee surfer folders and you will need to use Montecarlo simulations to create vertex-wise thresholds- to do this use the following script:
+ 
+ tcsh runClustmczsims.sh
+
+More info on cluster and vertex wise corrections can be found tuning the following command: 
+
+ mri_glmfit-sim --help
+
+14. View the results. Navigate to the folders that have been created based on all the input you've done (e.g., lh.thickness.fsgdfilename.10.glmdir) 
+
+Here you should see a file with the same pathname with a .summary extension. At the bottom of that file will be any clusters deemed to be statistically significant. 
+rh.thickness.adni.10.glmdir/2group2covar/cache.th30.pos.y.ocn.dat
+
+15. Visualize the results using Freeview 
+
+ freeview -f $SUBJECTS_DIR/fsaverage/surf/rh.inflated:overlay=cache.th13.pos.sig.cluster.mgh
+
