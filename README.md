@@ -100,6 +100,7 @@ tcsh runGLMs.sh studyname
 ```
 *note study name is same as FSGD file*
 *ensure Contrasts .mtx file is correct for that GLM*
+
 13. Run cluster correction script
 ```
 tcsh runClustSims.sh studyname
