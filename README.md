@@ -147,5 +147,4 @@ mri_glmfit-sim --help
 ```
 freeview -f $SUBJECTS_DIR/fsaverage/surf/rh.inflated:overlay=cache.th13.pos.sig.cluster.mgh
 ```
-[Original Documentation](https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki)
-[Tips and Tricks](https://sites.bu.edu/cnrlab/lab-resources/freesurfer-quality-control-guide/freesurfer-quality-control-step-3-fix-the-white-matter-surface/)
+[Original Documentation](https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki) & [Tips and Tricks](https://sites.bu.edu/cnrlab/lab-resources/freesurfer-quality-control-guide/freesurfer-quality-control-step-3-fix-the-white-matter-surface/)
