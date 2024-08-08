@@ -1,4 +1,4 @@
-# This is code to use freesurfer on the Northeastern Discovery Cluster
+# Freesurfer on the Northeastern Discovery Cluster
 ## This is how you run recon-all on the cluster
 reconnall_T1.sh runs one subject at a time. you will need to configure the file to direct it to the correct path.
 ```
@@ -21,8 +21,12 @@ while IFS= read -r s || [ -n "$s" ]; do
 done < "${dir}/subj.txt"
 ```
 ## This is how you extract individual subject data on the cluster
-You can extract individual subject data from multiple subjects and import them to a table quite easily with freesurfer functions, [asegstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/asegstats2table) and [aparcstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/aparcstats2table).
-
+You can extract individual subject data from multiple subjects and import them to a table quite easily with freesurfer functions, [asegstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/asegstats2table) and [aparcstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/aparcstats2table). 
+```
+asegstats2table --subjects sub1 sub2 sub3 sub4 --meas volume --tablefile aseg_stats.txt
+aparcstats2table --subjects sub1 sub2 sub3 sub4 --hemi rh --meas thickness --tablefile aparc_stats.txt
+```
+enter the hemisphere, (rh or lh), and measure you wish to extract. for aparc default is area (alt volume, thickness, thicknessstd, meancurv, gauscurv, foldind, curvind). for aseg there are only two options, volume or mean.
 ## This is how you visual freesurfer on the cluster
 1.	Log into ood.discovery.neu.edu
 2.	Open an XFCE terminal
