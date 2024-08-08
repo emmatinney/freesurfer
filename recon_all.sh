@@ -15,15 +15,10 @@
 module load freesurfer
 export FREESURFER_HOME=$HOME/freesurfer #this is the path for your installed freesurfer folder
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
-export FREESURFER=$HOME/freesurfer #this is the path for your installed freesurfer folder
-source $FREESURFER/SetUpFreeSurfer.sh
 #set working directory
 dir=/work/cnelab/practice_recon-all
-
-
 #open your subject script. wrap command will allow parallel processing for all subjects
 #recon-all -autorecon-all -sd 'pwd (this will set working directory to current directory)' -subjid [$whatever your subject id is set as] -i [file.nii] -qcache (allows permissions)
-
 while IFS= read -r s || [ -n "$s" ]; do
     log_file="recon-all_${s}_log.txt"
     error_file="recon-all_${s}_error.txt"
