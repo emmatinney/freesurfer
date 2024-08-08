@@ -11,7 +11,7 @@
   * Memory - 2
 4.	Once terminal is open:
   * 	module load freesurfer
-  * export SUBJECTS_DIR=/work/cnelab/TECHS/MRI/BID/sub-Pilot_1/anat/
+  * 	export SUBJECTS_DIR=/work/cnelab/TECHS/MRI/BID/sub-Pilot_1/anat/
   * 	export SUBJ=SUBJID
 5. Now we load a subject to check
   * 	freeview -v $SUBJECTS_DIR/$SUBJ/mri/orig.mgz -v $SUBJECTS_DIR/$SUBJ/mri/brainmask.mgz:colormap=jet:colorscale=0,1:opacity=0.3 -f $SUBJECTS_DIR/$SUBJ/surf/lh.pial:edgecolor='255,0,0' -f $SUBJECTS_DIR/$SUBJ/surf/rh.pial:edgecolor='255,0,0'
