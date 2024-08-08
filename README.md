@@ -10,11 +10,11 @@
   * CPU-2
   * Memory - 2
 4.	Once terminal is open:
-  * 	Type- “module load freesurfer”
-  * 	Type - “export SUBJECTS_DIR=/work/cnelab/TECHS/MRI/BID/sub-Pilot_1/anat/”
-  * 	Type - “export SUBJ=subject name”
+  * 	module load freesurfer
+  * export SUBJECTS_DIR=/work/cnelab/TECHS/MRI/BID/sub-Pilot_1/anat/
+  * 	export SUBJ=SUBJID
 5. Now we load a subject to check
-  * 	Type “ freeview -v $SUBJECTS_DIR/$SUBJ/mri/orig.mgz -v $SUBJECTS_DIR/$SUBJ/mri/brainmask.mgz:colormap=jet:colorscale=0,1:opacity=0.3 -f $SUBJECTS_DIR/$SUBJ/surf/lh.pial:edgecolor='255,0,0' -f $SUBJECTS_DIR/$SUBJ/surf/rh.pial:edgecolor='255,0,0' ”
+  * 	freeview -v $SUBJECTS_DIR/$SUBJ/mri/orig.mgz -v $SUBJECTS_DIR/$SUBJ/mri/brainmask.mgz:colormap=jet:colorscale=0,1:opacity=0.3 -f $SUBJECTS_DIR/$SUBJ/surf/lh.pial:edgecolor='255,0,0' -f $SUBJECTS_DIR/$SUBJ/surf/rh.pial:edgecolor='255,0,0'
   * Note that you should change subjectID to the actual subject you are working with
   * After hitting enter, a Freeview window should open showing you the outputs you specified:
   * Use the brain picture boxes to change which orthogonal view appears in the main viewing window. You can use window type to change the organization of the viewing windows. To change which brain slice you are viewing, use the 'Page Up' or 'Page Down' keys on your keyboard or the up and down arrows. (Mac users: press the fn key while using the up and down arrows.)
