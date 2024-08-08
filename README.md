@@ -31,7 +31,6 @@ enter the hemisphere, (rh or lh), and measure you wish to extract. for aparc def
 1.	Log into ood.discovery.neu.edu
 2.	Open an XFCE terminal
   * Interactive apps, XFCE terminal (alpha)
-  * Partition- short
   * Time - however long you have to work currently 
   * No GPU
   * CPU-2
@@ -39,8 +38,8 @@ enter the hemisphere, (rh or lh), and measure you wish to extract. for aparc def
 4.	Once terminal is open:
 ```
 module load freesurfer
-export SUBJECTS_DIR=/work/cnelab/TECHS/MRI/BID/sub-Pilot_1/anat/
-export SUBJ=SUBJID
+export SUBJECTS_DIR=TECHS/MRI/BIDS/derivatives/freesurfer/pre
+export SUBJ=sub-01
 ```
 5. Now we load a subject to check
 ```
