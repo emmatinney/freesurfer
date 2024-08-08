@@ -1,7 +1,27 @@
 # This is code to use freesurfer on the Northeastern Discovery Cluster
 ## This is how you run recon-all on the cluster
+reconnall_T1.sh runs one subject at a time. you will need to configure the file to direct it to the correct path.
+```
+export FREESURFER_HOME=$HOME/freesurfer #this is the path for your installed freesurfer folder
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+module load freesurfer
+recon-all -autorecon-all -sd `pwd` -subjid SUBJID -i *.nii.gz -qcache
+```
+recon_all.sh runs multiple subjects at a time in parallel
+```
+export FREESURFER_HOME=$HOME/freesurfer #this is the path for your installed freesurfer folder
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+module load freesurfer
+dir=/work/cnelab/practice_recon-all
+while IFS= read -r s || [ -n "$s" ]; do
+    log_file="recon-all_${s}_log.txt"
+    error_file="recon-all_${s}_error.txt"
 
+    sbatch --time=24:00:00 --output="$log_file" --error="$error_file" --wrap="recon-all -autorecon-all -sd $(pwd) -subjid $s -i ${dir}/T1s/sub-${s}_ses-1_T1w.nii.gz -qcache"
+done < "${dir}/subj.txt"
+```
 ## This is how you extract individual subject data on the cluster
+You can extract individual subject data from multiple subjects and import them to a table quite easily with freesurfer functions, [asegstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/asegstats2table) and [aparcstats2table](https://surfer.nmr.mgh.harvard.edu/fswiki/aparcstats2table).
 
 ## This is how you visual freesurfer on the cluster
 1.	Log into ood.discovery.neu.edu
