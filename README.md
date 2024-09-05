@@ -51,6 +51,9 @@ freeview -v $SUBJECTS_DIR/$SUBJ/mri/orig.mgz -v $SUBJECTS_DIR/$SUBJ/mri/brainmas
 6.	Now we check the surfaces- locate non brain tissue inside the pial surfaces
   * When you are looking for non-brain tissue in the pial surface, the best view to use is often the coronal view. Additionally, it is helpful to turn the various layers (pial surfaces and brainmask volume) on and off, so you can compare them against the anatomy in orig.mgz when deciding whether the boundaries are correct or need editing.
   * Make sure the brain mask is covering the entire pial surface
+```
+freeview -v $SUBJECT_DIR/$SUBJ/mri/T1.mgz -v $SUBJECT_DIR/$SUBJ/mri/wm.mgz -v $SUBJECT_DIR/$SUBJ/mri/brainmask.mgz -v $SUBJECT_DIR/$SUBJ/mri/aseg.mgz:colormap=lut:opacity=0.2 -f $SUBJECT_DIR/$SUBJ/surf/lh.white:edgecolor=blue $SUBJECT_DIR/$SUBJ/surf/lh.pial:edgecolor=red $SUBJECT_DIR/$SUBJ/surf/rh.white:edgecolor=blue $SUBJECT_DIR/$SUBJ/surf/rh.pial:edgecolor=red
+```
 7. Editing
   * Select voxel edit
   * Set brush value to 0 and eraser value to 1 to erase. Set brush to 1 and eraser to 0 to add. Adjust brush size as needed
